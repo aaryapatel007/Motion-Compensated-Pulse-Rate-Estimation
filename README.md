@@ -1,10 +1,5 @@
 # Motion-Compensated-Pulse-Rate-Estimation
 
-This project has 2 main parts:
-
-- [Part 1](#part-1-pulse-rate-algorithm-overview) - Develop a **Pulse Rate Algorithm** on the given training data. Then **Test Your Algorithm** and see that it has met the success criteria.
-- [Part 2](#part-2-clinical-application-overview) - Apply the Pulse Rate Algorithm on a **Clinical Application** and compute more clinically meaningful features and discover healthcare trends.
-
 -----
 
 ## Introduction
@@ -33,38 +28,22 @@ This plot is created by computing the mean absolute error at all -- or at least 
 Building a confidence algorithm for pulse rate estimation is a little tricker than logistic regression because intuitively there isn't some transformation of the algorithm output that can make a good confidence score. However, by understanding our algorithm behavior we can come up with some general ideas that might create a good confidence algorithm. For example, if our algorithm is picking a strong frequency component that's not present in the accelerometer we can be relatively confidence in the estimate. Turn this idea into an algorithm by quantifying "strong frequency component".
 
 -----
-## Part 1: Pulse Rate Algorithm Overview
+## Pulse Rate Algorithm Overview
 
 ### Algorithm Specifications
-You must build an algorithm that:
+Built an algorithm that:
   * estimates pulse rate from the PPG signal and a 3-axis accelerometer.
   * assumes pulse rate will be restricted between 40BPM (beats per minute) and 240BPM
   * produces an estimation confidence. A higher confidence value means that this estimate should be more accurate than an estimate with a lower confidence value.
   * produces an output at least every 2 seconds.  
 
-### Success Criteria
-Your algorithm performance success criteria is as follows: the mean absolute error at 90% availability must be less than 15 BPM on the test set.  Put another way, the best 90% of your estimates--according to your own confidence output-- must have a mean absolute error of less than 15 BPM. The evaluation function is included in the starter code.
-
-Note that the unit test will call `AggregateErrorMetric` on the output of your `RunPulseRateAlgorithm` on a test dataset that you do not have access to. The result of this call must be less than 15 BPM for your algorithm's performance to pass. The test set should be easier than the training set so as long as your algorithm is doing reasonably well on the training data set it should pass this test.
-
-**This will be validated through the Test Your Algorithm Workspace which includes a unit test.**
-
-### Some Helpful Tips
-  1. Remember to bandpass filter all your signals. Use the 40-240BPM range to create your pass band.
-  2. Use plt.specgram to visualize your signals in the frequency domain. You can plot your estimates on top of the spectrogram to see where things are going wrong.
-  3. When the dominant accelerometer frequency is the same as the PPG, try picking the next strongest PPG frequency if there is another good candidate.
-  4. Sometimes the cadence of the arm swing is the same as the heart beat. So if you can't find another good candidate pulse rate outside of the accelerometer peak, it may be the same as the accelerometer.
-  5. One option for a confidence algorithm is to answer the question, "How much energy in the frequency spectrum is concentrated near the pulse rate estimate?" You can answer this by summing frequency spectrum near the pulse rate estimate and dividing it by the sum of the entire spectrum.
-  
 ### Dataset
-You will be using the Troika<sup>1</sup> dataset to build your algorithm. Find the dataset under datasets/troika/training_data. The README in that folder will tell you how to interpret the data. The starter code contains a function to help load these files.
+Used the Troika<sup>1</sup> dataset to build the algorithm.
 
 -----
 ## Part 2: Clinical Application Overview
 
-Now that you have built your pulse rate algorithm and tested your algorithm to know it works, we can use it to compute more clinically meaningful features and discover healthcare trends.
-
-Specifically, you will use 24 hours of heart rate data from 1500 samples to try to validate the well known trend that average resting heart rate increases up until middle age and then decreases into old age. We'll also see if resting heart rates are higher for women than men. See the trend illustrated in this image:
+Used 24 hours of heart rate data from 1500 samples to try to validate the well known trend that average resting heart rate increases up until middle age and then decreases into old age. We'll also see if resting heart rates are higher for women than men. See the trend illustrated in this image:
 
 ![heart-rate-age-ref-chart](heart-rate-age-reference-chart.jpg)
 
@@ -75,10 +54,6 @@ The data from this project comes from the [Cardiac Arrythmia Suppression Trial (
 
 -----
 
-## Acknowledgement
-
-This project has been completed as a part of [AI for Healthcare](https://www.udacity.com/course/ai-for-healthcare-nanodegree--nd320).
-
 ## Citations
 1. **Troika** - Zhilin Zhang, Zhouyue Pi, Benyuan Liu, ‘‘TROIKA: A General Framework for Heart Rate Monitoring Using Wrist-Type Photoplethysmographic Signals During Intensive Physical Exercise,’’IEEE Trans. on Biomedical Engineering, vol. 62, no. 2, pp. 522-531, February 2015. Link
 2. **CAST RR Interval Sub-Study Database Citation** - Stein PK, Domitrovich PP, Kleiger RE, Schechtman KB, Rottman JN. Clinical and demographic determinants of heart rate variability in patients post myocardial infarction: insights from the Cardiac Arrhythmia Suppression Trial (CAST). Clin Cardiol 23(3):187-94; 2000 (Mar)
@@ -87,3 +62,7 @@ This project has been completed as a part of [AI for Healthcare](https://www.uda
 ## License
 
 This repository is licensed under the terms of the MIT license.
+
+## Acknowledgement
+
+This project has been completed as a part of [AI for Healthcare](https://www.udacity.com/course/ai-for-healthcare-nanodegree--nd320).
